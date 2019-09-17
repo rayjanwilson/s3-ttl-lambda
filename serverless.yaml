@@ -28,7 +28,7 @@ provider:
   environment:
     LOG_LEVEL: DEBUG
     S3_BUCKET: ${self:custom.s3_bucket_name}
-    TTL_HOURS: 12
+    TTL_HOURS: 24
 
   iamRoleStatements: # permissions for all of your functions can be set here
     - Effect: Allow

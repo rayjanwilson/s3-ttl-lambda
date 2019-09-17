@@ -46,7 +46,7 @@ SAM is really good, especially when starting development, however there are some
 
 The big thing SAM is great at is local development. Implementing a good offline/local development mode for serverless with python is still under investigation. Right now you can use `sls invoke local -f S3TTL -d '{}' --docker` but it's as slow as deploying to the cloud with a custom stage.
 
-Note: before deploying, replace values for `s3_bucket_name: BUCKET_I_WANT_TO_TTL_OBJECTS_IN` and `TTL_HOURS: 12` in `serverless.yaml`
+Note: before deploying, replace values for `s3_bucket_name: BUCKET_I_WANT_TO_TTL_OBJECTS_IN` and `TTL_HOURS: 24` in `serverless.yaml`
 ```bash
 # to deploy the entire backend
 # from the project's root directory
