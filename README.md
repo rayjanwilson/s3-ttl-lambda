@@ -40,12 +40,13 @@ pipenv --venv
 
 ### Deploying the Backend
 
-gearing spec uses [serverless.js](https://serverless.com/) for deployment.
+This project uses [serverless.js](https://serverless.com/) for deployment.
 
 SAM is really good, especially when starting development, however there are some limitations that serverless.js helps us overcome because of it's plugin architecture. In particular, `serverless-python-requirements` plugin
 
-The big thing SAM is great at is local development. Implementing a good offline/local development mode for serverless with python is still under investigation. Right now you can use `sls invoke local -f GearingApp -d '{}' --docker` but it's as slow as deploying to the cloud with a custom stage.
+The big thing SAM is great at is local development. Implementing a good offline/local development mode for serverless with python is still under investigation. Right now you can use `sls invoke local -f S3TTL -d '{}' --docker` but it's as slow as deploying to the cloud with a custom stage.
 
+Note: before deploying, replace values for `s3_bucket_name: BUCKET_I_WANT_TO_TTL_OBJECTS_IN` and `TTL_HOURS: 12` in `serverless.yaml`
 ```bash
 # to deploy the entire backend
 # from the project's root directory
