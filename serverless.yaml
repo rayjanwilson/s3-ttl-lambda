@@ -51,7 +51,7 @@ custom:
   false: false
   enable_docker: ${opt:enable_docker, self:custom.false}
 
-  s3_bucket_name: clicky-pop-lambda-layers-buildartifactsbucket-4z0bd7yuuyhy
+  s3_bucket_name: BUCKET_I_WANT_TO_TTL_OBJECTS_IN
 
   pythonRequirements:
     # dockerImage: lambci/lambda:build-python3.7   # this allows you to use a custom docker image
