@@ -1,4 +1,4 @@
-service: s3-ttl-3
+service: s3-ttl
 
 plugins:
   - serverless-python-requirements
