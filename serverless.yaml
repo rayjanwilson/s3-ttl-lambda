@@ -66,4 +66,4 @@ functions:
     module: lambdas
     handler: s3ttl.handler
     events:
-      - schedule: rate(10 minutes)
+      - schedule: rate(1 hours)
