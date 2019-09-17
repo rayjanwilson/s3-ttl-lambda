@@ -1,0 +1,69 @@
+service: s3-ttl-3
+
+plugins:
+  - serverless-python-requirements
+
+# packaging optimization
+package:
+  individually: true
+  excludeDevDependencies: true
+  include:
+    - "!./**"
+    - "lambdas/**"
+  exclude:
+    - "**"
+
+provider:
+  name: aws
+  region: ${opt:region, self:custom.defaultRegion}
+  stage: ${opt:stage, self:custom.defaultStage}
+
+  runtime: python3.7
+  # apiname: ${self:service}-${self:provider.stage}
+  timeout: 30
+  tracing:
+    lambda: true
+  # apiKeys:
+  #   - apikey_${self:provider.apiname}
+  environment:
+    LOG_LEVEL: DEBUG
+    S3_BUCKET: ${self:custom.s3_bucket_name}
+    TTL_HOURS: 12
+
+  iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: arn:aws:s3:::${self:custom.s3_bucket_name}/*
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: arn:aws:s3:::${self:custom.s3_bucket_name}
+    - Effect: Allow
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
+
+custom:
+  defaultStage: dev
+  defaultRegion: us-east-1
+  false: false
+  enable_docker: ${opt:enable_docker, self:custom.false}
+
+  s3_bucket_name: clicky-pop-lambda-layers-buildartifactsbucket-4z0bd7yuuyhy
+
+  pythonRequirements:
+    # dockerImage: lambci/lambda:build-python3.7   # this allows you to use a custom docker image
+    dockerizePip: ${self:custom.enable_docker}
+    slim: true
+    slimPatterns:
+      - "**/*.egg-info*"
+    noDeploy: []  #allows us to bundle our own boto3
+
+functions:
+  S3TTL3:
+    module: lambdas
+    handler: s3ttl.handler
+    events:
+      - schedule: rate(10 minutes)
