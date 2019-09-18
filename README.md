@@ -59,7 +59,7 @@ sls deploy --stage dev --enable_docker true --aws-profile customprofile
 
 ```bash
 # to deploy a single function
-sls deploy function --function S3TTL --stage dev --enable_docker true --aws-profile customprofile
+sls deploy function --function S3TTL3 --stage dev --enable_docker true --aws-profile customprofile
 ```
 
 - note that we are declaring the stage name to be something unrelated to `dev`, `test`, `stg`, or `prod`

@@ -37,5 +37,5 @@ def handler(event, context):
         yesno = should_delete(item.last_modified, TTL_HOURS)
         print(f'\tshould delete? {yesno}')
         if yesno:
-            print(f'deleting {item.key} from {item.bucket}')
+            print(f'deleting {item.key} from {item.bucket_name}')
             item.delete()
